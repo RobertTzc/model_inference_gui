@@ -1,0 +1,25 @@
+{
+    "classList": [
+        "Mallard",
+        "Pintail",
+        "Green-winged-teal",
+        "Gadwall",
+        "Shoveler",
+        "Widgeon",
+        "Canada-Goose",
+        "Greater-White-fronted-Goose",
+        "Snow-Goose"
+    ],
+    "GUIResolution": [
+        1200,
+        800
+    ],
+    "RelativeLayoutImageView": [
+        0.6666666666666666,
+        1
+    ],
+    "RelativeLayoutBirdView": [
+        0.16666666666666666,
+        0.25
+    ]
+}
