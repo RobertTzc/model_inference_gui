@@ -58,7 +58,7 @@ pip install cycler
 ```
 
 ## Model download:
-Please download the model here and put the extracted **checkpoint** folder under folder Retinanet_inference_example folder. Current checkpoint folder contains Retinanet Model weights and classification model weights.
+Please download the model here https://drive.google.com/file/d/1nyAW3DRDkTjqvoENW3ysyK9TF6zEHpKx/view?usp=sharing and put the extracted **checkpoint** folder under folder Retinanet_inference_example folder. Current checkpoint folder contains Retinanet Model weights and classification model weights.
 
 ## GUI usage
 Once the installation is complete and model weights is downloaded and placed, run the GUI_ver2.py file to start the program, you can use the following command to start the GUI:
