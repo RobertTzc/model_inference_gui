@@ -65,7 +65,8 @@ Once the installation is complete and model weights is downloaded and placed, ru
 ```
 //cd to the current directory
 python GUI_ver2.py
-```
+```![Screenshot from 2023-01-20 11-59-37](https://user-images.githubusercontent.com/71574752/213773521-64013052-a17f-430c-9e7e-ac509a85f9ac.png)
+
 In the image above shows a default UI interface of the Inference tool where major components are labeled. In the next section will describe how to use the UI.
 
 ### Loading images 
@@ -95,8 +96,8 @@ The GUI also collect two extra information, which are location and date of the c
 
 ## Start inference
 
-After all the step above has been done, click start inference and the model will start to detect the birds, it may take up to 1 minutes per image depend on the device, once the **start inference** button transfer from grey to active again, the inference is complete, and results will be shown on image preview screen.
-
+After all the step above has been done, click start inference and the model will start to detect the birds, it may take up to 1 minutes per image depend on the device, once the **start inference** button transfer from grey to active again, the inference is complete, and results will be shown on image preview screen. See figure below:
+![Screenshot from 2023-01-20 11-58-37](https://user-images.githubusercontent.com/71574752/213773610-0a97c2f4-8f3a-4743-ba2a-c0f59b29050f.png)
 
 ## Saving Results
 By default, this tool will create an folder where the input image folder located, with an extension of '_result', if a better threshold is being found by user and saved, it will be saved with extension **'_modified'**
