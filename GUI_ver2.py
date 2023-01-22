@@ -258,7 +258,7 @@ class ClassifyGUI():
                 image_out_dir = image_out_dir,text_out_dir = text_out_dir,csv_out_dir = csv_out_dir,
                 scaleByAltitude = True,defaultAltitude = altitude_list,
                 date_list = date_list,location_list = location_list,
-                visualize = True,device = torch.device('cuda'),model_type = 'Bird_drone')
+                visualize = True,device = torch.device('cpu'),model_type = 'Bird_drone')
         
         self.display_images()
 
