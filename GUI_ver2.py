@@ -14,7 +14,7 @@ from PIL import Image, ImageTk
 from PIL import Image, ImageDraw,ImageFont
 import collections
 import torch
-from classification_infernece_res18 import res18_classifier_inference
+from classifier_Bird_I.classification_infernece_res18 import res18_classifier_inference
 
 class ClassifyGUI():
     def __init__(self, config_data, root):
@@ -153,7 +153,7 @@ class ClassifyGUI():
 
     def load_classification_model(self):
         self.classification_model_dir = filedialog.askopenfilename(title=u'open classification model dir', initialdir=(
-            os.path.expanduser('./checkpoint/Bird_I_classifier')))
+            os.path.expanduser('./classifier_Bird_I/checkpoint/Bird_I_classifier')))
         model_dir_info =''+os.path.basename(self.classification_model_dir)
         self.classification_model_info_label.config(text = model_dir_info)
 
