@@ -14,6 +14,7 @@ from PIL import Image, ImageTk
 from PIL import Image, ImageDraw,ImageFont
 import collections
 import torch
+from classification_infernece_res18 import res18_classifier_inference
 
 class ClassifyGUI():
     def __init__(self, config_data, root):
@@ -71,10 +72,10 @@ class ClassifyGUI():
         self.detection_model_type.set("Retina-Net")
 
         Label(self.root,text="Classification Model selection").grid(row=3, column=3, columnspan=3, sticky=W)
-        Radiobutton(self.root, text='Res18', variable=self.classification_model_type, value='Res18',state=DISABLED).grid(row=4, column=3, sticky=W)
-        Radiobutton(self.root, text='xxx', variable=self.classification_model_type, value='Faster-RCNN',state=DISABLED).grid(row=4, column=4, sticky=W)
+        Radiobutton(self.root, text='Disable', variable=self.classification_model_type, value='Disable',state=ACTIVE).grid(row=4, column=3, sticky=W)
+        Radiobutton(self.root, text='Res18', variable=self.classification_model_type, value='Res18',state=ACTIVE).grid(row=4, column=4, sticky=W)
         Radiobutton(self.root, text='xxx', variable=self.classification_model_type, value='YOLOv5',state=DISABLED).grid(row=4, column=5, sticky=W)
-
+        self.classification_model_type.set("Disable")
         #Other parameters:
         Label(self.root,text="Image Altitude",).grid(row=5, column=3, columnspan=2, sticky=W)
         self.altitude_entry = Entry(self.root)
@@ -152,7 +153,7 @@ class ClassifyGUI():
 
     def load_classification_model(self):
         self.classification_model_dir = filedialog.askopenfilename(title=u'open classification model dir', initialdir=(
-            os.path.expanduser('/home/zt253/Models/model_inference_gui/Retinanet_inference_example/checkpoint/classification')))
+            os.path.expanduser('./checkpoint/Bird_I_classifier')))
         model_dir_info =''+os.path.basename(self.classification_model_dir)
         self.classification_model_info_label.config(text = model_dir_info)
 
@@ -186,7 +187,7 @@ class ClassifyGUI():
     def open_image_dir(self):
         self.image_id = 0
         file_path = filedialog.askdirectory(title=u'open_image_dir', initialdir=(
-            os.path.expanduser('/home/zt253/Models/model_inference_gui/Retinanet_inference_example/example_images/Bird_drone/60m')))
+            os.path.expanduser('./Retinanet_inference_example/example_images/Bird_drone/60m')))
         tmp = []
         for file in os.listdir(file_path):
             if file.endswith(('.jpg','.JPG','.png')):
@@ -199,7 +200,7 @@ class ClassifyGUI():
     def open_single_image(self):
         self.image_id = 0
         file_path = filedialog.askopenfilename(title=u'open_single_image', initialdir=(
-            os.path.expanduser('/home/zt253/Models/model_inference_gui/Retinanet_inference_example/example_images/Bird_drone/60m')))
+            os.path.expanduser('./Retinanet_inference_example/example_images/Bird_drone/60m')))
         self.image_list = [file_path]
         self.out_dir = os.path.dirname(file_path)+'_results'
         os.makedirs(self.out_dir,exist_ok=True)
@@ -258,9 +259,27 @@ class ClassifyGUI():
                 image_out_dir = image_out_dir,text_out_dir = text_out_dir,csv_out_dir = csv_out_dir,
                 scaleByAltitude = True,defaultAltitude = altitude_list,
                 date_list = date_list,location_list = location_list,
-                visualize = True,device = torch.device('cuda'),model_type = 'Bird_drone')
-        
+                visualize = True,device = torch.device('cpu'),model_type = 'Bird_drone')
+            
+        self.start_classifier()
         self.display_images()
+    
+    def start_classifier(self):
+        classification_model_type = self.classification_model_type.get()
+        print ('selecting model',classification_model_type)
+        if (classification_model_type=='Disable'):
+            return 
+        if (classification_model_type=='Res18'):
+            model_dir =self.classification_model_dir
+            detection_root_dir = os.path.join(self.out_dir,'detection-results')
+            text_out_dir = os.path.join(self.out_dir,'classification-results')
+            visual_out_dir = os.path.join(self.out_dir,'visualize-results')
+            image_list =self.image_list
+            category_index_dir = self.classification_model_dir.replace('model.pth','category_index.json')
+            os.makedirs(text_out_dir,exist_ok=True)
+            res18_classifier_inference(model_dir,category_index_dir,image_list,detection_root_dir,text_out_dir,visual_out_dir)
+
+
 
     def apply_NMS_threshold(self,bbox):
        return py_cpu_nms(bbox, self.NMS_threshold/100.0)

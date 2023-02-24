@@ -57,7 +57,7 @@ def inference_mega_image_Retinanet(image_list, model_dir, image_out_dir,text_out
     conf_thresh = get_model_conf_threshold(model_type=model_type)
     model_dir,ref_altitude = get_model_extension(model_type=model_type,model_dir=model_dir,defaultaltitude=defaultAltitude[0])
     print ('The model actually used: ',model_dir)
-    if (kwargs['device']!=torch.device('cuda')):
+    if (kwargs['device']!=torch.device('cuda') or kwargs['device']!='cuda' ):
         print ('loading CPU mode')
         device = torch.device('cpu')
         net = torch.load(model_dir,map_location=device)
@@ -92,7 +92,7 @@ def inference_mega_image_Retinanet(image_list, model_dir, image_out_dir,text_out
             with torch.no_grad():
                 inputs = transform(cv2.resize(
                     sub_image, (512, 512), interpolation=cv2.INTER_AREA))
-                inputs = inputs.unsqueeze(0).to(kwargs['device'])
+                inputs = inputs.unsqueeze(0).to(device)
                 loc_preds, cls_preds = net(inputs)
                 boxes, labels, scores = encoder.decode(
                     loc_preds.data.squeeze(), cls_preds.data.squeeze(), 512, CLS_THRESH = conf_thresh,NMS_THRESH = 0.5)
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     
     location_list = [args.image_location for _ in image_list]
     date_list = [args.image_date for _ in image_list]
-    
+    device = 'cuda'
     target_dir = args.out_dir
     model_dir = args.model_dir
     image_out_dir = os.path.join(target_dir,'visualize-results')

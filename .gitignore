@@ -1,0 +1,15 @@
+Retinanet_inference_example/checkpoint/readme.md
+Retinanet_inference_example/checkpoint/Bird_drone/configs_alt_30.json
+Retinanet_inference_example/checkpoint/Bird_drone/configs_alt_60.json
+Retinanet_inference_example/checkpoint/Bird_drone/configs_alt_90.json
+Retinanet_inference_example/checkpoint/Bird_drone/final_model_alt_30.pkl
+Retinanet_inference_example/checkpoint/Bird_drone/final_model_alt_60.pkl
+Retinanet_inference_example/checkpoint/Bird_drone/final_model_alt_90.pkl
+Retinanet_inference_example/checkpoint/Bird_drone/loss_alt_30.jpg
+Retinanet_inference_example/checkpoint/Bird_drone/loss_alt_60.jpg
+Retinanet_inference_example/checkpoint/Bird_drone/loss_alt_90.jpg
+Retinanet_inference_example/checkpoint/classification/efficientnet-b3-sklearn-last.pt
+Retinanet_inference_example/checkpoint/classification/efficientnet-b5-sklearn-last.pt
+Retinanet_inference_example/checkpoint/classification/resnet18-sklearn-sf-vr-last.pt
+Retinanet_inference_example/checkpoint/classification/resnet50-sklearn-last.pt
+Retinanet_inference_example/checkpoint/classification/resnext50-sklearn-last.pt
