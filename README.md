@@ -86,6 +86,10 @@ We provide multiple options of detection and classification models for the user 
 
 After selecting the models to use, the user must specify the folder containing the model weight using the **Load Model** button to load corresponding model weights. Again only the folder directory is needed, once selected the GUI will automatically show the model weights founded under the folder. If a classification model is not selected, loading the classification model weights should be skipped.
 
+### Classification model
+
+Classification model can be activated if needed, the classification is most suitable with image at altitude of 15meters, higher altitude images may having unexpected effects.
+
 ### Altitude input
 Some of the models rescale the images based on altitude (or ground sample distance), so the user must input the altitude (in meters) the images were taken at. The altitude must be an integer and should represent meters in altitude.
 Heights at which our models were trained and corresponding GSDs:
@@ -135,6 +139,11 @@ Result_image_folder: xxx_result
 │   └── ...
 ├── detection_summary.csv
 └── *detection-results_modified
+│   ├── image_name1.txt
+│   ├── image_name2.txt
+│   ├── image_name3.txt
+│   └── ...
+└── *classification-results
 │   ├── image_name1.txt
 │   ├── image_name2.txt
 │   ├── image_name3.txt

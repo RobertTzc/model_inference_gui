@@ -62,3 +62,4 @@ classifier_Bird_I/classification_infernece_res18.py
 classifier_Bird_I/__pycache__/classification_infernece_res18.cpython-38.pyc
 classifier_Bird_I/classification_infernece_res18.py
 classifier_Bird_I/__pycache__/classification_infernece_res18.cpython-38.pyc
+checkpoint/checkpoint_gui.zip
