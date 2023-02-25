@@ -38,6 +38,7 @@ class ClassifyGUI():
         self.bbox = []
         self.filtered_box_idx = []
         self.config_UI()
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     def config_UI(self):
         # Menu bar configuration
@@ -141,19 +142,20 @@ class ClassifyGUI():
     
 
 
-    #load model dir
+    #Load detection model, this is for height vary model, user only specify the root dir the func will load all models under this dir.
     def load_detection_model(self):
         self.detection_model_dir = filedialog.askdirectory(title=u'open detection model dir', initialdir=(
-            os.path.expanduser('./Retinanet_inference_example/checkpoint/Bird_drone')))
+            os.path.expanduser('./checkpoint/Retinanet/Bird_drone')))
         model_dir_info =''
         for file in os.listdir(self.detection_model_dir):
             if (file.endswith(('pt','pkl','pth'))):
                 model_dir_info+=file+'\n'
         self.detection_model_info_label.config(text = model_dir_info)
 
+    #Load classification model
     def load_classification_model(self):
         self.classification_model_dir = filedialog.askopenfilename(title=u'open classification model dir', initialdir=(
-            os.path.expanduser('./classifier_Bird_I/checkpoint/Bird_I_classifier')))
+            os.path.expanduser('./checkpoint/classifier/Res18_Bird_I')))
         model_dir_info =''+os.path.basename(self.classification_model_dir)
         self.classification_model_info_label.config(text = model_dir_info)
 
@@ -187,7 +189,7 @@ class ClassifyGUI():
     def open_image_dir(self):
         self.image_id = 0
         file_path = filedialog.askdirectory(title=u'open_image_dir', initialdir=(
-            os.path.expanduser('./Retinanet_inference_example/example_images/Bird_drone/60m')))
+            os.path.expanduser('./example_images/Bird_drone/15m')))
         tmp = []
         for file in os.listdir(file_path):
             if file.endswith(('.jpg','.JPG','.png')):
@@ -200,7 +202,7 @@ class ClassifyGUI():
     def open_single_image(self):
         self.image_id = 0
         file_path = filedialog.askopenfilename(title=u'open_single_image', initialdir=(
-            os.path.expanduser('./Retinanet_inference_example/example_images/Bird_drone/60m')))
+            os.path.expanduser('./example_images/Bird_drone/15m')))
         self.image_list = [file_path]
         self.out_dir = os.path.dirname(file_path)+'_results'
         os.makedirs(self.out_dir,exist_ok=True)
@@ -243,7 +245,6 @@ class ClassifyGUI():
         #self.bbox = inference(self.model_path, self.image_list, isHeight=True)
 
         detection_model_type = self.detection_model_type.get()
-        classification_model_type = self.classification_model_type.get()
         if (detection_model_type == 'Retina-Net'):
             model_dir = os.path.join(self.detection_model_dir,'final_model.pkl')
             image_out_dir = os.path.join(self.out_dir,'visualize-results')
@@ -259,8 +260,10 @@ class ClassifyGUI():
                 image_out_dir = image_out_dir,text_out_dir = text_out_dir,csv_out_dir = csv_out_dir,
                 scaleByAltitude = True,defaultAltitude = altitude_list,
                 date_list = date_list,location_list = location_list,
-                visualize = True,device = torch.device('cpu'),model_type = 'Bird_drone')
-            
+                visualize = True,device = self.device,model_type = 'Bird_drone')
+        
+
+        print ('Detection completed.')
         self.start_classifier()
         self.display_images()
     
@@ -277,7 +280,10 @@ class ClassifyGUI():
             image_list =self.image_list
             category_index_dir = self.classification_model_dir.replace('model.pth','category_index.json')
             os.makedirs(text_out_dir,exist_ok=True)
-            res18_classifier_inference(model_dir,category_index_dir,image_list,detection_root_dir,text_out_dir,visual_out_dir)
+            res18_classifier_inference(model_dir,category_index_dir,image_list,detection_root_dir,text_out_dir,visual_out_dir,self.device)
+        
+            
+        print ('classification completed')
 
 
 

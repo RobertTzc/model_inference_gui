@@ -25,7 +25,7 @@ def plot_box(image_dir,txt_dir,out_dir):
             box[1])), (int(box[2]), int(box[3])), (255, 0, 0), 2)
     cv2.imwrite(os.path.join(out_dir,image_name),image)
 
-def res18_classifier_inference(model_dir,category_index_dir,image_list,detection_root_dir,text_out_dir,visual_out_dir):
+def res18_classifier_inference(model_dir,category_index_dir,image_list,detection_root_dir,text_out_dir,visual_out_dir,device):
     os.makedirs(text_out_dir,exist_ok=True)
     test_transform = transforms.Compose([
                 transforms.ToTensor(),
@@ -41,7 +41,7 @@ def res18_classifier_inference(model_dir,category_index_dir,image_list,detection
     resnet18.fc =  nn.Sequential(resnet18.fc,nn.Dropout(p = 0.2),nn.Linear(in_features=1000, out_features=len(category_dict), bias=True))
     resnet18.load_state_dict(torch.load(model_dir))
     resnet18 = resnet18.eval()
-    resnet18.cuda()
+    resnet18.to(device)
     resnet18.eval()
 
 
@@ -58,7 +58,7 @@ def res18_classifier_inference(model_dir,category_index_dir,image_list,detection
             coord = [int(i) for i in line[2:]]
             coord= [max(0,coord[0]),max(0,coord[1]),min(image.shape[1],coord[2]),min(image.shape[0],coord[3]),]
             cropped_image = image[coord[1]:coord[3],coord[0]:coord[2],:]
-            inputs = test_transform(cropped_image).unsqueeze(0).cuda()
+            inputs = test_transform(cropped_image).unsqueeze(0).to(device)
             out = resnet18(inputs)
             out = torch.max(out, dim=1)[1].squeeze().data
             preds = category_list[out]
