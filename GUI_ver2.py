@@ -69,8 +69,8 @@ class ClassifyGUI():
 
         # Model type selection
         Label(self.root,text="Detection Model selection").grid(row=1, column=3, columnspan=3, sticky=W)
-        Radiobutton(self.root, text='Retina-Net', variable=self.detection_model_type, value='Retina-Net',state=ACTIVE).grid(row=2, column=3, sticky=W)
-        Radiobutton(self.root, text='Faster-RCNN', variable=self.detection_model_type, value='Faster-RCNN',state=DISABLED).grid(row=2, column=4, sticky=W)
+        Radiobutton(self.root, text='Retina-Net', variable=self.detection_model_type, value='Retina-Net_Bird_drone',state=ACTIVE).grid(row=2, column=3, sticky=W)
+        Radiobutton(self.root, text='Retina-Net_KNN', variable=self.detection_model_type, value='Retina-Net_Bird_drone_KNN',state=ACTIVE).grid(row=2, column=4, sticky=W)
         Radiobutton(self.root, text='YOLOv5', variable=self.detection_model_type, value='YOLOv5',state=DISABLED).grid(row=2, column=5, sticky=W)
         self.detection_model_type.set("Retina-Net")
 
@@ -252,7 +252,8 @@ class ClassifyGUI():
         detection_model_type = self.detection_model_type.get()
         if (not self.resume):
 
-            if (detection_model_type == 'Retina-Net'):
+            if ('Retina-Net' in detection_model_type):
+                model_type = detection_model_type.replace('Retina-Net_','')
                 model_dir = os.path.join(self.detection_model_dir,'final_model.pkl')
                 image_out_dir = os.path.join(self.out_dir,'visualize-results')
                 text_out_dir = os.path.join(self.out_dir,'detection-results')
@@ -267,7 +268,7 @@ class ClassifyGUI():
                     image_out_dir = image_out_dir,text_out_dir = text_out_dir,csv_out_dir = csv_out_dir,
                     scaleByAltitude = True,defaultAltitude = altitude_list,
                     date_list = date_list,location_list = location_list,
-                    visualize = True,device = self.device,model_type = 'Bird_drone')
+                    visualize = True,device = self.device,model_type = model_type)
         
 
             print ('Detection completed.')
