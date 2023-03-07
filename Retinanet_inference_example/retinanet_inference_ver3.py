@@ -67,7 +67,7 @@ class Retinanet_instance():
             from retinanet import RetinaNet
             self.model = RetinaNet(num_classes=1)
             self.encoder = DataEncoder(self.device)
-        self.model = torch.load(self.model_dir)
+        self.model = torch.load(self.model_dir,map_location=self.device)
         self.model = self.model.module.to(self.device)
         self.model.eval()
         print('check net mode',next(self.model.parameters()).device)
