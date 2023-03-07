@@ -38,7 +38,9 @@ class ClassifyGUI():
         self.bbox = []
         self.filtered_box_idx = []
         self.config_UI()
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device('cpu')
+        self.resume = False
+        #self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     def config_UI(self):
         # Menu bar configuration
@@ -216,6 +218,7 @@ class ClassifyGUI():
         self.image_name = os.path.basename(self.image_list[self.image_id])
         detection_dir = os.path.join(self.out_dir,'detection-results',self.image_name.split('.')[0]+'.txt')
         if (os.path.exists(detection_dir)):
+            self.resume = True
             with open(detection_dir,'r') as f:
                 data = f.readlines()
             self.bbox = []
@@ -233,6 +236,8 @@ class ClassifyGUI():
                     (box[0], box[1], box[2], box[3]), outline='red', width=8)
                 font = ImageFont.load_default()
                 draw.text((box[0]-10, box[1]-10),box[-1], font = font,fill =(255, 0, 0))
+        else:
+            self.resume = False
         self.image_preview_tk = ImageTk.PhotoImage(self.image_preview.resize(
             (self.image_preview_size[0], self.image_preview_size[1]), resample=0))
         Label(root, image=self.image_preview_tk, width=self.image_preview_size[0], height=self.image_preview_size[1]).grid(
@@ -245,25 +250,29 @@ class ClassifyGUI():
         #self.bbox = inference(self.model_path, self.image_list, isHeight=True)
 
         detection_model_type = self.detection_model_type.get()
-        if (detection_model_type == 'Retina-Net'):
-            model_dir = os.path.join(self.detection_model_dir,'final_model.pkl')
-            image_out_dir = os.path.join(self.out_dir,'visualize-results')
-            text_out_dir = os.path.join(self.out_dir,'detection-results')
-            csv_out_dir = os.path.join(self.out_dir,'detection_summary.csv')
-            os.makedirs(image_out_dir,exist_ok=True)
-            os.makedirs(text_out_dir,exist_ok=True)
-            altitude_list = [self.altitude for _ in self.image_list]
-            date_list = [self.date_info.get() for _ in self.image_list]
-            location_list = [self.location_info.get() for _ in self.image_list]
-            inference_mega_image_Retinanet(image_list = self.image_list,
-                model_dir = model_dir,
-                image_out_dir = image_out_dir,text_out_dir = text_out_dir,csv_out_dir = csv_out_dir,
-                scaleByAltitude = True,defaultAltitude = altitude_list,
-                date_list = date_list,location_list = location_list,
-                visualize = True,device = self.device,model_type = 'Bird_drone')
+        if (not self.resume):
+
+            if (detection_model_type == 'Retina-Net'):
+                model_dir = os.path.join(self.detection_model_dir,'final_model.pkl')
+                image_out_dir = os.path.join(self.out_dir,'visualize-results')
+                text_out_dir = os.path.join(self.out_dir,'detection-results')
+                csv_out_dir = os.path.join(self.out_dir,'detection_summary.csv')
+                os.makedirs(image_out_dir,exist_ok=True)
+                os.makedirs(text_out_dir,exist_ok=True)
+                altitude_list = [self.altitude for _ in self.image_list]
+                date_list = [self.date_info.get() for _ in self.image_list]
+                location_list = [self.location_info.get() for _ in self.image_list]
+                inference_mega_image_Retinanet(image_list = self.image_list,
+                    model_dir = model_dir,
+                    image_out_dir = image_out_dir,text_out_dir = text_out_dir,csv_out_dir = csv_out_dir,
+                    scaleByAltitude = True,defaultAltitude = altitude_list,
+                    date_list = date_list,location_list = location_list,
+                    visualize = True,device = self.device,model_type = 'Bird_drone')
         
 
-        print ('Detection completed.')
+            print ('Detection completed.')
+        else:
+            print ('Detection skipped')
         self.start_classifier()
         self.display_images()
     
