@@ -105,8 +105,6 @@ For windows:
 For Linux:
   pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
 The rest are identical on both systems:
-pip install efficientnet_pytorch
-pip install resnet_pytorch
 pip install opencv-contrib-python
 pip install Pillow==6.1 #6.2 also work
 pip install pandas
