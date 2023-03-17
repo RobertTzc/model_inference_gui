@@ -77,20 +77,17 @@ After creating and activating a virtual environment, we recommend installing pac
 * To install the required packages, run the following code after creating and activating the virtual environment:
 ```
 conda install pytorch torchvision torchaudio cpuonly -c pytorch
-y
 conda install -c anaconda tk
-y
-pip install resnet_pytorch
 pip install opencv-contrib-python
 pip install Pillow==6.2.2
 pip install pandas
-pip install pyexiv2
+pip install pyexiv2 #For mac os please use pip install pyexiv2==2.3.1
 pip install matplotlib
 pip install -i https://test.pypi.org/simple/ WaterFowlTools
 pip install packaging
 pip install kiwisolver
 pip install cycler
-pip install efficientnet_pytorch
+pip install tqdm
 
 ```
 *Note*: For installation of Pillow==6.2.2, 6.1 also works. Try using Pillow==6.1 if errors arise attempting to install Pillow==6.2.2
@@ -105,6 +102,7 @@ For windows:
 For Linux:
   pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
 The rest are identical on both systems:
+
 pip install opencv-contrib-python
 pip install Pillow==6.1 #6.2 also work
 pip install pandas
@@ -114,6 +112,7 @@ pip install -i https://test.pypi.org/simple/ WaterFowlTools
 pip install packaging
 pip install kiwisolver
 pip install cycler
+pip install tqdm
 
 ```
 
