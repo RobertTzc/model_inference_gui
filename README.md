@@ -94,7 +94,6 @@ pip install tensorboardX
 pip install progress 
 pip install numpy
 
-
 ```
 *Note*: For installation of Pillow==6.2.2, 6.1 also works. Try using Pillow==6.1 if errors arise attempting to install Pillow==6.2.2
 

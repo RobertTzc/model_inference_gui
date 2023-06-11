@@ -1,0 +1,59 @@
+Mallard Male
+Mallard Female
+Ring-necked duck Male
+Ring-necked duck Female
+Green-winged teal
+Other
+	Dabbler
+		Shoveler
+			Male
+			Female
+			Unknown
+		Pintail		
+			Male
+			Female
+			Unknown
+		Gadwall
+		American Widgeon
+			Male
+			Female
+			Unknown
+		Wood Duck
+			Male
+			Female
+			Unknown
+		Other Dabbler (fill in species)
+	Merganser
+		Hooded Merganser
+			Male
+			Female
+			Unknown
+		Common Merganser
+			Male
+			Female
+			Unknown
+	Diver
+		Scaup
+			Male
+			Female
+			Unknown
+		Canvasback
+			Male
+			Female
+			Unknown
+		Redhead
+			Male
+			Female
+			Unknown
+		Other Diver (fill in species)
+Goose
+	White-fronted Goose
+	Canada Goose
+	Snow/Ross’ Goose
+	Snow/Ross’ Goose (blue)
+	Swan
+Unknown
+Multiple Birds in one box
+Box not around whole bird/not centered on bird (partial bird)
+Not target species
+Not a bird
