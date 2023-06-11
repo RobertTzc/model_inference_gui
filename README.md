@@ -192,7 +192,7 @@ After selecting the models to use, the user must specify the folder containing t
 2. In the pop-up window, navigate to the checkpoint folder (model_inference_gui\checkpoint).
 3. Select the desired model folder 
    * For Retina-Net or Retina-Net_KNN, open the Retinanet folder and select Bird_Drone or Bird_Drone_KNN and choose select folder.
-   * For YOLOv5, select the Yolov5 folder and choose select folder
+   * For Yolonas, select the Yolonas folder and choose select folder(default)
    
 Once selected the GUI will automatically show the model weights file(s) found in the folder. 
 
@@ -202,8 +202,8 @@ If a classification model is not selected, skip this section of loading the clas
 2. In the pop-up window, navigate to the checkpoint folder (model_inference_gui\checkpoint).
 3. Open the "classifier" folder
 4. Open the folder that corresponds to the chosen classifier
-   * For Res18, open the Res18_Bird_I folder
-5. Select the "model.pth" file and select open to load the model weights.
+   * For Res18, open the Res18_Bird_I folder and select the "model.pth" file and select open to load the model weights.
+   * For MixMatch, open the Res18_Bird_I/MixMatch folder and select the model
    
 Once selected the GUI will automatically show the model weights file. 
 
