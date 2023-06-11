@@ -49,7 +49,7 @@ git clone https://github.com/RobertTzc/model_inference_gui.git
 If needed, for additional help with this step, please refer to the link here: https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
 ## Model download:
-* After cloning the repository onto your device, download the checkpoint_gui.zip folder here: https://drive.google.com/file/d/1JervM9OLvnueS_2aiufIteBUeNcEVjob/view?usp=sharing
+* After cloning the repository onto your device, download the checkpoint_gui.zip folder here: [https://drive.google.com/file/d/1JervM9OLvnueS_2aiufIteBUeNcEVjob/view?usp=sharing](https://drive.google.com/file/d/1WtYiKb9dRKE9LgPIw_u1-fk03bwd3Ccd/view?usp=sharing)
 
 * After download, extract the checkpoint_gui.zip folder (commonly in the "Downloads" folder) and place the "classifier" and "Retinanet" folders in the checkpoint folder under the model_inference_gui folder.
 
