@@ -88,11 +88,11 @@ pip install packaging
 pip install kiwisolver
 pip install cycler
 pip install tqdm
-pip install supe_gradients==3.1.0
-pip install setuptools == 59.5.0
-pip install tensorboardX
-pip install progress 
-pip install numpy
+pip install supe_gradients==3.1.0(new)
+pip install setuptools == 59.5.0(new)
+pip install tensorboardX(new)
+pip install progress(new)
+pip install numpy(new)
 
 ```
 *Note*: For installation of Pillow==6.2.2, 6.1 also works. Try using Pillow==6.1 if errors arise attempting to install Pillow==6.2.2
@@ -118,11 +118,11 @@ pip install packaging
 pip install kiwisolver
 pip install cycler
 pip install tqdm
-pip install supe_gradients==3.1.0
-pip install setuptools == 59.5.0
-pip install tensorboardX
-pip install progress 
-pip install numpy
+pip install supe_gradients==3.1.0(new)
+pip install setuptools == 59.5.0(new)
+pip install tensorboardX(new)
+pip install progress(new)
+pip install numpy(new)
 
 
 ```
